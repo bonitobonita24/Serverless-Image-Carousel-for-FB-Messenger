@@ -1,11 +1,1 @@
-# Cloudflare Pages redirects
-
-# https://developers.cloudflare.com/pages/configuration/redirects/
-
-# Serve the gallery page for all /clients/<name> routes.
-
-# Static assets (.jpg, .png, .json, etc.) are served directly by Pages
-
-# before redirects are evaluated, so images and manifests work as-is.
-
 /clients/:name /index.html 200
