@@ -1,0 +1,33 @@
+{
+  "name": "Static Image Gallery",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    }
+  },
+  "forwardPorts": [8080],
+  "postCreateCommand": "npm install --no-save wrangler && pip install Pillow",
+  "postStartCommand": "echo '\\n✅ Dev container ready!\\n  Run: npm run dev\\n  Then visit: http://localhost:8080/clients/lushcamp\\n'",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "github.copilot",
+        "github.copilot-chat",
+        "ms-python.python",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "editor.formatOnSave": true
+      }
+    }
+  },
+  "portsAttributes": {
+    "8080": {
+      "label": "Gallery Dev Server",
+      "onAutoForward": "openBrowser"
+    }
+  }
+}

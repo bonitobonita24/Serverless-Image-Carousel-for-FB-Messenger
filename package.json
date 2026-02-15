@@ -1,0 +1,16 @@
+{
+  "name": "static-image-gallery",
+  "version": "1.0.0",
+  "description": "Static image carousel gallery for Facebook Messenger, deployed on Cloudflare Pages",
+  "private": true,
+  "scripts": {
+    "dev": "npx wrangler pages dev public --port 8080",
+    "serve": "node server.js",
+    "deploy": "npx wrangler pages deploy public --project-name=static-image-gallery",
+    "preview": "npx wrangler pages dev public --port 8080",
+    "manifest": "python3 generate_manifests.py",
+    "manifest:client": "python3 generate_manifests.py"
+  },
+  "keywords": ["gallery", "carousel", "cloudflare-pages", "static", "facebook-messenger"],
+  "license": "MIT"
+}

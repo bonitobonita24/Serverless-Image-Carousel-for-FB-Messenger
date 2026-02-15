@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Debug Gallery</title>
+  <style>
+    body { font-family: monospace; background: #1a1a1a; color: #ddd; padding: 20px; }
+    .log { background: #000; padding: 10px; margin: 10px 0; border-left: 3px solid #0f0; }
+    .error { border-left-color: #f00; color: #f88; }
+    code { background: #222; padding: 2px 6px; }
+  </style>
+</head>
+<body>
+  <h1>Gallery Debug Log</h1>
+  <div id="logs"></div>
+
+  <script>
+    const logs = document.getElementById('logs');
+    function log(msg, isError = false) {
+      console.log(msg);
+      const div = document.createElement('div');
+      div.className = 'log' + (isError ? ' error' : '');
+      div.textContent = msg;
+      logs.appendChild(div);
+    }
+
+    log('=== Starting Diagnostics ===');
+    log(`URL: ${window.location.href}`);
+    log(`Pathname: ${window.location.pathname}`);
+
+    // Test 1: Check if URL matches pattern
+    const path = window.location.pathname.replace(/\/+$/, '');
+    const match = path.match(/\/clients\/([^/]+)/);
+    log(`After removing trailing slash: "${path}"`);
+    if (match) {
+      log(`✓ Client match found: "${match[1]}"`);
+    } else {
+      log(`✗ Client match FAILED - expected /clients/name pattern`, true);
+    }
+
+    // Test 2: Try to fetch manifest
+    if (match) {
+      const clientName = match[1];
+      const basePath = `/clients/${clientName}`;
+      const manifestUrl = `${basePath}/manifest.json`;
+      
+      log(`Attempting to fetch: ${manifestUrl}`);
+      
+      fetch(manifestUrl)
+        .then(response => {
+          log(`✓ Fetch response received: ${response.status} ${response.statusText}`);
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(manifest => {
+          log(`✓ Manifest parsed successfully`);
+          log(`  - Client: ${manifest.client}`);
+          log(`  - Title: ${manifest.title}`);
+          log(`  - Images: ${manifest.images?.length || 0}`);
+          if (manifest.images?.length > 0) {
+            manifest.images.forEach((img, i) => {
+              log(`    [${i}] ${img.src} (${img.alt})`);
+            });
+          }
+        })
+        .catch(err => {
+          log(`✗ Error fetching manifest: ${err.message}`, true);
+          log(`Stack: ${err.stack}`, true);
+        });
+    }
+
+    // Test 3: Check CORS headers
+    log(`\n=== Testing Image Fetch ===`);
+    fetch('/clients/lushcamp/AirconRooms.jpg', { method: 'HEAD' })
+      .then(r => {
+        log(`✓ Image HEAD request: ${r.status}`);
+        log(`  Content-Type: ${r.headers.get('content-type')}`);
+        log(`  Content-Length: ${r.headers.get('content-length')}`);
+      })
+      .catch(err => log(`✗ Image HEAD failed: ${err.message}`, true));
+
+  </script>
+</body>
+</html>

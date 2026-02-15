@@ -1,0 +1,21 @@
+{
+  "client": "lushcamp",
+  "title": "Lushcamp Image Gallery",
+  "images": [
+    {
+      "src": "AirconRooms.jpg",
+      "alt": "Aircon Rooms",
+      "caption": "Aircon Rooms"
+    },
+    {
+      "src": "CabinRooms.jpg",
+      "alt": "Cabin Rooms",
+      "caption": "Cabin Rooms"
+    },
+    {
+      "src": "DayTour.jpg",
+      "alt": "Day Tour",
+      "caption": "Day Tour"
+    }
+  ]
+}
