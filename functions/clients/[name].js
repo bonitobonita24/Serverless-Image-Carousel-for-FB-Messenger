@@ -36,8 +36,6 @@ export async function onRequest(context) {
       html = html.replace(/__OG_URL__/g, escapeAttr(pageUrl));
       html = html.replace(/__OG_IMAGE__/g, escapeAttr(imageUrl));
       html = html.replace(/__PAGE_TITLE__/g, escapeAttr(title));
-      // fb:app_id is optional but Facebook recommends it — leave empty if not set
-      html = html.replace(/__FB_APP_ID__/g, '');
     }
   } catch (err) {
     console.error('OG injection error:', err);
