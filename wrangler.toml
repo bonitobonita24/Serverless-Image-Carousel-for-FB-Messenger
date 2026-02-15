@@ -3,11 +3,9 @@
 
 name = "static-image-gallery"
 compatibility_date = "2025-01-01"
-main = "index.js"
 
 # Pages project - static assets served from the `public` directory
-[site]
-bucket = "./public"
+pages_build_output_dir = "./public"
 
 # Custom headers for optimal caching and Messenger compatibility
 # (These are also defined in public/_headers for Pages)
