@@ -35,7 +35,7 @@ export async function onRequest(context) {
       html = html.replace(/__OG_DESCRIPTION__/g, escapeAttr(description));
       html = html.replace(/__OG_URL__/g, escapeAttr(pageUrl));
       html = html.replace(/__OG_IMAGE__/g, escapeAttr(imageUrl));
-      html = html.replace(/__PAGE_TITLE__/g, escapeAttr(title));
+      html = html.replace(/<title>Image Gallery<\/title>/g, `<title>${escapeAttr(title)}</title>`);
     }
   } catch (err) {
     console.error('OG injection error:', err);
