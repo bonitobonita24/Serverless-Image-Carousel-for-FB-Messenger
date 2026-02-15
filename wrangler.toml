@@ -1,7 +1,7 @@
 # Cloudflare Pages configuration
 # Docs: https://developers.cloudflare.com/pages/configuration/wrangler-configuration/
 
-name = "static-image-gallery"
+name = "static-image-gallery-carousel"
 compatibility_date = "2025-01-01"
 
 # Pages project - static assets served from the `public` directory
