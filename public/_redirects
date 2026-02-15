@@ -1,2 +1,1 @@
-/clients/:name /index.html 200
-/clients/:name/ /index.html 200
+/clients/:name/ /clients/:name 301
