@@ -30,12 +30,14 @@ export async function onRequest(context) {
 
       const pageUrl = `${origin}/clients/${clientName}`;
 
-      // Replace placeholder OG tags with real values
-      html = html.replace('__OG_TITLE__', escapeAttr(title));
-      html = html.replace('__OG_DESCRIPTION__', escapeAttr(description));
-      html = html.replace('__OG_URL__', escapeAttr(pageUrl));
+      // Replace placeholder OG tags with real values (use regex for multiple occurrences)
+      html = html.replace(/__OG_TITLE__/g, escapeAttr(title));
+      html = html.replace(/__OG_DESCRIPTION__/g, escapeAttr(description));
+      html = html.replace(/__OG_URL__/g, escapeAttr(pageUrl));
       html = html.replace(/__OG_IMAGE__/g, escapeAttr(imageUrl));
-      html = html.replace('__PAGE_TITLE__', escapeAttr(title));
+      html = html.replace(/__PAGE_TITLE__/g, escapeAttr(title));
+      // fb:app_id is optional but Facebook recommends it — leave empty if not set
+      html = html.replace(/__FB_APP_ID__/g, '');
     }
   } catch (err) {
     console.error('OG injection error:', err);
